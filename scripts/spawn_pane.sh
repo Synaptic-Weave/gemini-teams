@@ -6,11 +6,6 @@
 AGENT_NAME=$1
 INITIAL_PROMPT=$2
 
-if [ -z "$TMUX" ]; then
-  echo "Error: This script must be run within a tmux session."
-  exit 1
-fi
-
 if [ -z "$AGENT_NAME" ]; then
   echo "Usage: $0 <agent_name> [initial_prompt]"
   exit 1
@@ -52,8 +47,17 @@ echo "| $AGENT_ID | $AGENT_NAME | ACTIVE | [View Mailbox](./${AGENT_ID}.md) |" >
 # We use -i for interactive mode
 CMD="gemini -i \"@$AGENT_NAME [AGENT_ID: $AGENT_ID] [MAILBOX: $MAILBOX] $INITIAL_PROMPT\""
 
-# Spawn the pane
-tmux split-window -h "$CMD"
+# Spawn the pane or fallback to background
+if [ -n "$TMUX" ]; then
+  tmux split-window -h "$CMD"
+  echo "Spawned $AGENT_ID in a new tmux pane."
+else
+  LOG_FILE="$BUS_ROOT/${AGENT_ID}.log"
+  echo "Tmux not detected. Falling back to background execution..."
+  # Run in background with nohup and redirect output to log
+  nohup bash -c "$CMD" > "$LOG_FILE" 2>&1 &
+  echo "Spawned $AGENT_ID in the background (PID: $!)."
+  echo "Logs available at: $LOG_FILE"
+fi
 
-echo "Spawned $AGENT_ID in a new pane."
 echo "Mailbox: $MAILBOX"

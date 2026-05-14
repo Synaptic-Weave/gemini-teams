@@ -53,5 +53,8 @@ All coordination data is stored in:
   - Use `report_back.sh` to signal completion or provide major updates.
   - You can use `send_message.sh` to talk to other peers listed in `index.md`.
 
-## Peer-to-Peer Communication
-Agents are encouraged to collaborate. A `security_auditor` can message a `codebase_investigator` for clarification on internal logic using `send_message.sh`.
+## Tmux vs. Background Mode
+While this skill is optimized for `tmux`, it will automatically fall back to **Background Mode** if tmux is not detected.
+
+- **Tmux Mode:** Opens a new interactive pane for the agent.
+- **Background Mode:** Spawns the agent as a background process. Output is redirected to a `.log` file in the bus directory. Use this when you want agents to work asynchronously without occupying terminal space.

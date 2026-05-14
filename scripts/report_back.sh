@@ -18,7 +18,9 @@ fi
 # Append result to mailbox
 echo -e "\n---\n### Result/Report ($(date))\n$RESULT_SUMMARY" >> "$MAILBOX"
 
-# Notify via tmux
-tmux display-message "Agent ${AGENT_ID:-"Unknown"} reported back."
+# Notify via tmux if available
+if [ -n "$TMUX" ]; then
+  tmux display-message "Agent ${AGENT_ID:-"Unknown"} reported back."
+fi
 
 echo "Reported back to mailbox: $MAILBOX"

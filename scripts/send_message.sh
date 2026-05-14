@@ -26,7 +26,8 @@ SENDER_ID=${AGENT_ID:-"Coordinator"}
 echo -e "\n---\n### Message from $SENDER_ID ($(date))\n$MESSAGE" >> "$MAILBOX"
 
 # Notify the tmux pane if possible
-# We can try to find the pane by looking for the AGENT_ID in the command line or just display a global message
-tmux display-message "New message for $TARGET_ID from $SENDER_ID"
+if [ -n "$TMUX" ]; then
+  tmux display-message "New message for $TARGET_ID from $SENDER_ID"
+fi
 
 echo "Message sent to $TARGET_ID."
