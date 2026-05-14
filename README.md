@@ -16,19 +16,35 @@ A specialized skill for [Gemini CLI](https://github.com/google/gemini-cli) that 
 
 ## Installation
 
-1.  **Package the skill:**
+### Method 1: Direct from GitHub (Recommended)
+You can install the skill directly from the repository using the Gemini CLI:
+
+```bash
+gemini skills install https://github.com/Synaptic-Weave/gemini-teams --scope user
+```
+
+### Method 2: Manual Clone
+If you want to modify the skill or install it from a local copy:
+
+1.  **Clone the repo:**
     ```bash
-    gemini skills package ./gemini-teams
+    git clone https://github.com/Synaptic-Weave/gemini-teams.git
+    cd gemini-teams
     ```
-2.  **Install the skill:**
+2.  **Package the skill:**
+    ```bash
+    gemini skills package .
+    ```
+3.  **Install the package:**
     ```bash
     gemini skills install gemini-teams.skill --scope user
     ```
-3.  **Reload your session:**
-    In your interactive Gemini session, run:
-    ```bash
-    /skills reload
-    ```
+
+### Post-Installation
+After installing, you **must** reload your active Gemini session to enable the skill:
+```bash
+/skills reload
+```
 
 ## Usage
 
