@@ -45,9 +45,11 @@ After installing or linking, you **must** reload your active Gemini session to e
 
 ## Usage
 
+### Slash Commands
+- **/deploy-team [path] [name] [stack] [desc]**: Automates the deployment of the Matrix Team to a project. If arguments are missing, the coordinator will prompt you for them.
+
 ### As a Coordinator
-- **Spawn an agent:** `"Spawn @codebase-investigator to analyze the auth logic."`
-- **Follow up:** `"Ask codebase_investigator_1 to look at the database too."`
+...
 
 ### As a Specialist (Inside a Pane)
 - **Report back:** Use the `report_back.sh` script to send findings to the coordinator's mailbox.
