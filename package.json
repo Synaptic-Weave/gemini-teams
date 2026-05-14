@@ -1,0 +1,9 @@
+{
+  "name": "gemini-teams",
+  "version": "0.1.0",
+  "description": "Gemini CLI extension for multi-agent teams.",
+  "private": true,
+  "scripts": {
+    "package": "gemini extensions package ."
+  }
+}
